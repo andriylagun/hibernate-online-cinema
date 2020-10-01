@@ -1,6 +1,5 @@
 package com.online.cinema.util;
 
-import com.online.cinema.exceptions.DataProcessingException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
