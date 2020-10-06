@@ -1,4 +1,4 @@
-package com.online.cinema.model;
+package com.online.cinema.entity.movie.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

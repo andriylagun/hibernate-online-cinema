@@ -1,33 +1,29 @@
-package com.online.cinema.dao.impl;
+package com.online.cinema.dao;
 
-import com.online.cinema.dao.MovieDao;
 import com.online.cinema.exceptions.DataProcessingException;
-import com.online.cinema.lib.Dao;
-import com.online.cinema.model.Movie;
 import com.online.cinema.util.HibernateUtil;
-import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-@Dao
-public class MovieDaoImpl implements MovieDao {
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
 
+public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
-    public Movie add(Movie movie) {
+    public T add(T element) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.save(element);
             transaction.commit();
-            return movie;
+            return element;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert Movie entity", e);
+            throw new DataProcessingException("Can't insert entity", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -35,15 +31,14 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 
-    @Override
-    public List<Movie> getAll() {
+    protected List<T> getAll(Class<T> clazz) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            CriteriaQuery<Movie> criteriaQuery = session.getCriteriaBuilder()
-                    .createQuery(Movie.class);
-            criteriaQuery.from(Movie.class);
+            CriteriaQuery<T> criteriaQuery = session.getCriteriaBuilder()
+                    .createQuery(clazz);
+            criteriaQuery.from(clazz);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Error retrieving all movies. ", e);
+            throw new DataProcessingException("Error retrieving content ", e);
         }
     }
 }
