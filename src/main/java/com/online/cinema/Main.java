@@ -2,12 +2,11 @@ package com.online.cinema;
 
 import com.online.cinema.entity.cinemahall.model.CinemaHall;
 import com.online.cinema.entity.cinemahall.service.CinemaHallService;
+import com.online.cinema.entity.movie.model.Movie;
+import com.online.cinema.entity.movie.service.MovieService;
 import com.online.cinema.entity.moviesession.model.MovieSession;
 import com.online.cinema.entity.moviesession.service.MovieSessionService;
 import com.online.cinema.lib.Injector;
-import com.online.cinema.entity.movie.model.Movie;
-import com.online.cinema.entity.movie.service.MovieService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

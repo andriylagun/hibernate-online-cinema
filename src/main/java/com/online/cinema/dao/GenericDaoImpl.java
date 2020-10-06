@@ -2,11 +2,10 @@ package com.online.cinema.dao;
 
 import com.online.cinema.exceptions.DataProcessingException;
 import com.online.cinema.util.HibernateUtil;
+import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     @Override

@@ -1,7 +1,6 @@
 package com.online.cinema.entity.cinemahall.service;
 
 import com.online.cinema.entity.cinemahall.model.CinemaHall;
-
 import java.util.List;
 
 public interface CinemaHallService {

@@ -5,7 +5,6 @@ import com.online.cinema.entity.moviesession.model.MovieSession;
 import com.online.cinema.entity.moviesession.service.MovieSessionService;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
