@@ -6,6 +6,9 @@ import com.online.cinema.entity.movie.model.Movie;
 import com.online.cinema.entity.movie.service.MovieService;
 import com.online.cinema.entity.moviesession.model.MovieSession;
 import com.online.cinema.entity.moviesession.service.MovieSessionService;
+import com.online.cinema.entity.user.model.User;
+import com.online.cinema.entity.user.security.AuthenticationService;
+import com.online.cinema.entity.user.service.UserService;
 import com.online.cinema.lib.Injector;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,5 +56,15 @@ public class Main {
 
         System.out.println(movieSessionService
                 .findAvailableSessions(2L, LocalDate.of(2020, 10, 22)));
+
+        UserService userService
+                = (UserService) injector.getInstance(UserService.class);
+        AuthenticationService authenticationService
+                = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        authenticationService.register("user1@gmail.com", "pass");
+        authenticationService.register("user2@gmail.com", "pass");
+        System.out.println(userService.findByEmail("user1@gmail.com").toString());
+
+        System.out.println(authenticationService.login("user2@gmail.com", "pass").toString());
     }
 }

@@ -25,7 +25,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                     = criteriaBuilder.createQuery(User.class);
             Root<User> root = query.from(User.class);
             return session.createQuery(
-                    query.distinct(true).where(criteriaBuilder.equal(root.get("login"), email)))
+                    query.distinct(true).where(criteriaBuilder.equal(root.get("email"), email)))
                     .uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessingException(

@@ -6,6 +6,8 @@ import com.online.cinema.entity.user.service.UserService;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Inject
@@ -17,8 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email)
-                .orElse(null);
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 }

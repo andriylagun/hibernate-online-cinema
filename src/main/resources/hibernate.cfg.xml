@@ -11,10 +11,11 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <mapping class="com.online.cinema.entity.movie.model.Movie"/>
         <mapping class="com.online.cinema.entity.cinemahall.model.CinemaHall"/>
         <mapping class="com.online.cinema.entity.moviesession.model.MovieSession"/>
+        <mapping class="com.online.cinema.entity.user.model.User"/>
     </session-factory>
 </hibernate-configuration>
