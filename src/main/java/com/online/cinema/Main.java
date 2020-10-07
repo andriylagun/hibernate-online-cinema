@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Main {
     private static Injector injector = Injector.getInstance("com.online.cinema");
 
-    public static void main(String[] args) throws AuthenticationException {
+    public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie1 = new Movie();
         movie1.setTitle("Movie1");
@@ -64,7 +64,10 @@ public class Main {
         authenticationService.register("user1@gmail.com", "pass");
         authenticationService.register("user2@gmail.com", "pass");
         System.out.println(userService.findByEmail("user1@gmail.com").toString());
-
-        System.out.println(authenticationService.login("user2@gmail.com", "pass").toString());
+        try {
+            System.out.println(authenticationService.login("user2@gmail.com", "pass").toString());
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
     }
 }
