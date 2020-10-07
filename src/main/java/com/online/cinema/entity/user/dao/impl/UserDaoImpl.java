@@ -19,8 +19,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     public Optional<User> findByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<User> query
-                    = criteriaBuilder.createQuery(User.class);
+            CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
             Root<User> root = query.from(User.class);
             return session.createQuery(query.distinct(true)
                     .where(criteriaBuilder.equal(root.get("email"), email)))

@@ -8,6 +8,7 @@ import com.online.cinema.entity.moviesession.model.MovieSession;
 import com.online.cinema.entity.moviesession.service.MovieSessionService;
 import com.online.cinema.entity.user.security.AuthenticationService;
 import com.online.cinema.entity.user.service.UserService;
+import com.online.cinema.exceptions.AuthenticationException;
 import com.online.cinema.lib.Injector;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class Main {
     private static Injector injector = Injector.getInstance("com.online.cinema");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie1 = new Movie();
         movie1.setTitle("Movie1");
