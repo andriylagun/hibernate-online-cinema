@@ -6,14 +6,12 @@ import com.online.cinema.entity.user.model.User;
 import com.online.cinema.exceptions.DataProcessingException;
 import com.online.cinema.lib.Dao;
 import com.online.cinema.util.HibernateUtil;
-import org.hibernate.Session;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import org.hibernate.Session;
 
 @Dao
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {

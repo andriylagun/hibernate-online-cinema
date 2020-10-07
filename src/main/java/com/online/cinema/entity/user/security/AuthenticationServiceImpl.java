@@ -6,7 +6,6 @@ import com.online.cinema.exceptions.AuthException;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
 import com.online.cinema.util.HashUtil;
-
 import java.util.Optional;
 
 @Service

@@ -6,7 +6,6 @@ import com.online.cinema.entity.movie.model.Movie;
 import com.online.cinema.entity.movie.service.MovieService;
 import com.online.cinema.entity.moviesession.model.MovieSession;
 import com.online.cinema.entity.moviesession.service.MovieSessionService;
-import com.online.cinema.entity.user.model.User;
 import com.online.cinema.entity.user.security.AuthenticationService;
 import com.online.cinema.entity.user.service.UserService;
 import com.online.cinema.lib.Injector;

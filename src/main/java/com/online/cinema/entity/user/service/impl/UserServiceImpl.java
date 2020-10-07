@@ -5,7 +5,6 @@ import com.online.cinema.entity.user.model.User;
 import com.online.cinema.entity.user.service.UserService;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
-
 import java.util.Optional;
 
 @Service
