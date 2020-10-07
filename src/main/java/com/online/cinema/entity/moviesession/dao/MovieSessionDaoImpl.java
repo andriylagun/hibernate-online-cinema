@@ -37,7 +37,8 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
             return session.createQuery(query.where(idPredicate, datePredicate)).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException(
-                    "There was an error retrieving available sessions", e);
+                    "There was an error retrieving available sessions for movie with id "
+                            + movieId + "and date " + date.toString(), e);
         }
     }
 }
