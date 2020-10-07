@@ -1,10 +1,10 @@
-package com.online.cinema.service.impl;
+package com.online.cinema.entity.movie.service.impl;
 
-import com.online.cinema.dao.MovieDao;
+import com.online.cinema.entity.movie.dao.MovieDao;
+import com.online.cinema.entity.movie.model.Movie;
+import com.online.cinema.entity.movie.service.MovieService;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
-import com.online.cinema.model.Movie;
-import com.online.cinema.service.MovieService;
 import java.util.List;
 
 @Service
