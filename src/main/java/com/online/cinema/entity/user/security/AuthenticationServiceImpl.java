@@ -2,7 +2,7 @@ package com.online.cinema.entity.user.security;
 
 import com.online.cinema.entity.user.model.User;
 import com.online.cinema.entity.user.service.UserService;
-import com.online.cinema.exceptions.AuthException;
+import com.online.cinema.exceptions.AuthenticationException;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
 import com.online.cinema.util.HashUtil;
@@ -14,11 +14,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private UserService userService;
 
     @Override
-    public User login(String email, String password) throws AuthException {
+    public User login(String email, String password) throws AuthenticationException {
         Optional<User> user = userService.findByEmail(email);
         if (user.isEmpty() || !HashUtil.hashPassword(password, user.get().getSalt())
                 .equals(user.get().getPassword())) {
-            throw new AuthException("Your login or password is incorrect. Please try again.");
+            throw new AuthenticationException("Your login or password is incorrect."
+                    + " Please try again.");
         }
         return user.get();
     }
