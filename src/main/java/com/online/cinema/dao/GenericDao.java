@@ -6,4 +6,6 @@ public interface GenericDao<T> {
     T add(T t);
 
     List<T> getAll();
+
+    T get(Long id);
 }

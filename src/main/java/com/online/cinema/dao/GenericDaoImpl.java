@@ -40,4 +40,10 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             throw new DataProcessingException("Error retrieving content ", e);
         }
     }
+
+    protected T get(Class<T> clazz, Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(clazz, id);
+        }
+    }
 }
