@@ -8,4 +8,6 @@ public interface GenericDao<T> {
     List<T> getAll();
 
     T get(Long id);
+
+    void update(T entity);
 }
