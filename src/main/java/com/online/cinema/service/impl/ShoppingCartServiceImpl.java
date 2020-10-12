@@ -30,7 +30,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void addSession(MovieSession movieSession, User user) {
         ShoppingCart shoppingCart = shoppingCartDao.getByUser(user).get();
-        Ticket ticket = new Ticket().builder()
+        Ticket ticket = Ticket.builder()
                 .movieSession(movieSession)
                 .user(user)
                 .build();
@@ -41,7 +41,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void registerNewShoppingCart(User user) {
-        add(new ShoppingCart().builder()
+        add(ShoppingCart.builder()
                 .user(user)
                 .build());
     }
