@@ -13,9 +13,9 @@ import com.online.cinema.service.ShoppingCartService;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
-    ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
     @Inject
-    TicketsDao ticketsDao;
+    private TicketsDao ticketsDao;
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
