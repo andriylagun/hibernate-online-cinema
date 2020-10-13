@@ -13,9 +13,11 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <mapping class="com.online.cinema.entity.movie.model.Movie"/>
-        <mapping class="com.online.cinema.entity.cinemahall.model.CinemaHall"/>
-        <mapping class="com.online.cinema.entity.moviesession.model.MovieSession"/>
-        <mapping class="com.online.cinema.entity.user.model.User"/>
+        <mapping class="com.online.cinema.entity.CinemaHall"/>
+        <mapping class="com.online.cinema.entity.Movie"/>
+        <mapping class="com.online.cinema.entity.MovieSession"/>
+        <mapping class="com.online.cinema.entity.ShoppingCart"/>
+        <mapping class="com.online.cinema.entity.Ticket"/>
+        <mapping class="com.online.cinema.entity.User"/>
     </session-factory>
 </hibernate-configuration>
