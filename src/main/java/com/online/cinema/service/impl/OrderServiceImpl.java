@@ -27,11 +27,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {
-        List<Ticket> tickets = new ArrayList<>(shoppingCart.getTickets());
         Order order = Order.builder()
                 .orderDate(LocalDateTime.now())
                 .user(shoppingCart.getUser())
-                .tickets(tickets)
+                .tickets(new ArrayList<>(shoppingCart.getTickets()))
                 .build();
         add(order);
         shoppingCartService.clear(shoppingCart);

@@ -24,8 +24,8 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
             CriteriaQuery<Order> query
                     = criteriaBuilder.createQuery(Order.class);
             Root<Order> root = query.from(Order.class);
-            root.fetch("user", JoinType.LEFT);
-            root.fetch("tickets", JoinType.INNER);
+            root.fetch("tickets", JoinType.LEFT);
+            root.fetch("user");
             Predicate idPredicate
                     = criteriaBuilder.equal(root.get("user"), user.getId());
             return session.createQuery(query.distinct(true).where(idPredicate)).getResultList();
