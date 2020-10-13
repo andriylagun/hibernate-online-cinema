@@ -19,7 +19,6 @@ public class OrderServiceImpl implements OrderService {
     @Inject
     private ShoppingCartService shoppingCartService;
 
-
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {
         Order order = Order.builder()
