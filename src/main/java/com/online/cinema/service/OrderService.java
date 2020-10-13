@@ -6,8 +6,6 @@ import com.online.cinema.entity.User;
 import java.util.List;
 
 public interface OrderService {
-    Order add(Order order);
-
     Order completeOrder(ShoppingCart shoppingCart);
 
     List<Order> getOrderHistory(User user);
