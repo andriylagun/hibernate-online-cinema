@@ -16,6 +16,7 @@
         <mapping class="com.online.cinema.entity.CinemaHall"/>
         <mapping class="com.online.cinema.entity.Movie"/>
         <mapping class="com.online.cinema.entity.MovieSession"/>
+        <mapping class="com.online.cinema.entity.Order"/>
         <mapping class="com.online.cinema.entity.ShoppingCart"/>
         <mapping class="com.online.cinema.entity.Ticket"/>
         <mapping class="com.online.cinema.entity.User"/>

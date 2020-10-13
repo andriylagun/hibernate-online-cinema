@@ -3,6 +3,8 @@ package com.online.cinema;
 import com.online.cinema.entity.CinemaHall;
 import com.online.cinema.entity.Movie;
 import com.online.cinema.entity.MovieSession;
+import com.online.cinema.entity.Order;
+import com.online.cinema.entity.ShoppingCart;
 import com.online.cinema.entity.User;
 import com.online.cinema.exceptions.AuthenticationException;
 import com.online.cinema.lib.Injector;
@@ -10,10 +12,12 @@ import com.online.cinema.security.AuthenticationService;
 import com.online.cinema.service.CinemaHallService;
 import com.online.cinema.service.MovieService;
 import com.online.cinema.service.MovieSessionService;
+import com.online.cinema.service.OrderService;
 import com.online.cinema.service.ShoppingCartService;
 import com.online.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.online.cinema");
@@ -81,5 +85,24 @@ public class Main {
         shoppingCartService.clear(shoppingCartService.getByUser(user));
         shoppingCartService.addSession(movieSession2, user);
         System.out.println(shoppingCartService.getByUser(user));
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+
+        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+
+        Order order = orderService.completeOrder(shoppingCart);
+        System.out.println("ORDER AFTER COMPLETE ORDER\n" + order);
+        shoppingCart = shoppingCartService.getByUser(user);
+        System.out.println("CART AFTER COMPLETE ORDER\n" + shoppingCart);
+
+        shoppingCartService.addSession(movieSession1, user);
+        shoppingCartService.addSession(movieSession2, user);
+        shoppingCart = shoppingCartService.getByUser(user);
+        System.out.println("CART AFTER ADD SESSION\n" + shoppingCart);
+
+        order = orderService.completeOrder(shoppingCart);
+        System.out.println("ORDER AFTER COMPLETE ORDER\n" + order);
+
+        List<Order> orderList = orderService.getOrderHistory(user);
+        orderList.forEach(System.out::println);
     }
 }
