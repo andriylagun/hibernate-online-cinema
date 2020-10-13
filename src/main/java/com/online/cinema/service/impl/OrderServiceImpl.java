@@ -3,7 +3,6 @@ package com.online.cinema.service.impl;
 import com.online.cinema.dao.OrderDao;
 import com.online.cinema.entity.Order;
 import com.online.cinema.entity.ShoppingCart;
-import com.online.cinema.entity.Ticket;
 import com.online.cinema.entity.User;
 import com.online.cinema.lib.Inject;
 import com.online.cinema.lib.Service;
