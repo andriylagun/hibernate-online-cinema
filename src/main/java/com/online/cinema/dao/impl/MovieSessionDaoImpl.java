@@ -19,7 +19,7 @@ import org.hibernate.Session;
 @Dao
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
         implements MovieSessionDao {
-    private static Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 
     @Override
     public List<MovieSession> getAll() {
