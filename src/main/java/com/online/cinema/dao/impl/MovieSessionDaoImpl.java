@@ -13,11 +13,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 @Dao
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
         implements MovieSessionDao {
+    private static Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 
     @Override
     public List<MovieSession> getAll() {

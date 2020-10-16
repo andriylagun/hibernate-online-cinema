@@ -10,10 +10,13 @@ import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 @Dao
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
+    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
+
     @Override
     public Optional<User> findByEmail(String email) {
         logger.info("Trying to user by email: " + email);

@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
-    protected static Logger logger = Logger.getLogger(GenericDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(GenericDaoImpl.class);
     protected final SessionFactory factory;
 
     protected GenericDaoImpl() {
@@ -70,6 +70,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             transaction = session.beginTransaction();
             session.update(entity);
             transaction.commit();
+            logger.info("Entity was successfully updated");
         } catch (Exception exception) {
             if (transaction != null) {
                 transaction.rollback();

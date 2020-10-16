@@ -32,7 +32,7 @@ public class Main {
         Movie movie2 = new Movie();
         movie2.setTitle("Movie2");
         movieService.add(movie2);
-        movieService.getAll().forEach(System.out::println);
+        movieService.getAll().forEach(logger::info);
 
         CinemaHallService cinemaHallService
                 = (CinemaHallService) injector.getInstance(CinemaHallService.class);
@@ -76,17 +76,18 @@ public class Main {
         try {
             logger.info(authenticationService.login("user2@gmail.com", "pass").toString());
         } catch (AuthenticationException e) {
-            logger.error(e.getMessage(), e);
+            logger.warn("Login failed: " + e.getMessage(), e);
         }
 
         ShoppingCartService shoppingCartService
                 = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         shoppingCartService.addSession(movieSession1, user);
         shoppingCartService.addSession(movieSession2, user);
-        logger.info(shoppingCartService.getByUser(user));
+        logger.info("Added sessions to shopping cart " + shoppingCartService.getByUser(user));
         shoppingCartService.clear(shoppingCartService.getByUser(user));
         shoppingCartService.addSession(movieSession2, user);
-        logger.info(shoppingCartService.getByUser(user));
+        logger.info("Added session to shopping cart "
+                + shoppingCartService.getByUser(user) + "after clearing");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
