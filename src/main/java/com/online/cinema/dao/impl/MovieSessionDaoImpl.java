@@ -13,11 +13,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 @Dao
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
         implements MovieSessionDao {
+    private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 
     @Override
     public List<MovieSession> getAll() {
@@ -31,7 +33,9 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            logger.info("Trying to get available sessions");
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> query
                     = criteriaBuilder.createQuery(MovieSession.class);

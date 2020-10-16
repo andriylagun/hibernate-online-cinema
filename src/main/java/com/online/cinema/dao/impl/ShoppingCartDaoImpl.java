@@ -10,13 +10,16 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 @Dao
 public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements ShoppingCartDao {
+    private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
 
     @Override
     public List<ShoppingCart> getAll() {
+        logger.info("Trying to get all shopping carts");
         try (Session session = factory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<ShoppingCart> getAllShoppingCartsQuery =
@@ -36,6 +39,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
 
     @Override
     public Optional<ShoppingCart> getByUser(User user) {
+        logger.info("Trying to get shopping cart of user: " + user);
         try (Session session = factory.openSession()) {
             return session.createQuery("FROM ShoppingCart sc left join fetch sc.tickets "
                     + "join fetch sc.user WHERE sc.user = :user", ShoppingCart.class)
