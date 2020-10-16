@@ -31,7 +31,9 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            logger.info("Trying to get available sessions");
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> query
                     = criteriaBuilder.createQuery(MovieSession.class);

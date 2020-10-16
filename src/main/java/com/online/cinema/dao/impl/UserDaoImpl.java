@@ -16,6 +16,7 @@ import org.hibernate.Session;
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     @Override
     public Optional<User> findByEmail(String email) {
+        logger.info("Trying to user by email: " + email);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
