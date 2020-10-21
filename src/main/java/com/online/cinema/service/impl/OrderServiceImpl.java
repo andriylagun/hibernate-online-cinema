@@ -4,20 +4,24 @@ import com.online.cinema.dao.OrderDao;
 import com.online.cinema.entity.Order;
 import com.online.cinema.entity.ShoppingCart;
 import com.online.cinema.entity.User;
-import com.online.cinema.lib.Inject;
-import com.online.cinema.lib.Service;
 import com.online.cinema.service.OrderService;
 import com.online.cinema.service.ShoppingCartService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Inject
     private OrderDao orderDao;
-    @Inject
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    public OrderServiceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
+        this.orderDao = orderDao;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {

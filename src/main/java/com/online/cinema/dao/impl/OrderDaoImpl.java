@@ -4,8 +4,6 @@ import com.online.cinema.dao.OrderDao;
 import com.online.cinema.entity.Order;
 import com.online.cinema.entity.User;
 import com.online.cinema.exceptions.DataProcessingException;
-import com.online.cinema.lib.Dao;
-import com.online.cinema.util.HibernateUtil;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,14 +12,20 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     private static final Logger logger = Logger.getLogger(OrderDaoImpl.class);
 
+    protected OrderDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public List<Order> getOrderHistory(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = super.factory.openSession()) {
             logger.info("Trying to get orders of user: " + user);
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Order> query

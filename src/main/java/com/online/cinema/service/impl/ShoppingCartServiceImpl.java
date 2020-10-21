@@ -6,16 +6,20 @@ import com.online.cinema.entity.MovieSession;
 import com.online.cinema.entity.ShoppingCart;
 import com.online.cinema.entity.Ticket;
 import com.online.cinema.entity.User;
-import com.online.cinema.lib.Inject;
-import com.online.cinema.lib.Service;
 import com.online.cinema.service.ShoppingCartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    @Inject
     private ShoppingCartDao shoppingCartDao;
-    @Inject
     private TicketsDao ticketsDao;
+
+    @Autowired
+    public ShoppingCartServiceImpl(ShoppingCartDao shoppingCartDao, TicketsDao ticketsDao) {
+        this.shoppingCartDao = shoppingCartDao;
+        this.ticketsDao = ticketsDao;
+    }
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {

@@ -3,7 +3,6 @@ package com.online.cinema.dao.impl;
 import com.online.cinema.dao.ShoppingCartDao;
 import com.online.cinema.entity.ShoppingCart;
 import com.online.cinema.entity.User;
-import com.online.cinema.lib.Dao;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,10 +11,16 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements ShoppingCartDao {
     private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
+
+    protected ShoppingCartDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     @Override
     public List<ShoppingCart> getAll() {

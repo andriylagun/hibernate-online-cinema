@@ -3,8 +3,6 @@ package com.online.cinema.dao.impl;
 import com.online.cinema.dao.MovieSessionDao;
 import com.online.cinema.entity.MovieSession;
 import com.online.cinema.exceptions.DataProcessingException;
-import com.online.cinema.lib.Dao;
-import com.online.cinema.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -15,11 +13,17 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
         implements MovieSessionDao {
     private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
+
+    protected MovieSessionDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     @Override
     public List<MovieSession> getAll() {
@@ -34,7 +38,7 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = super.factory.openSession()) {
             logger.info("Trying to get available sessions");
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> query

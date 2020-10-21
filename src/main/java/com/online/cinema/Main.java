@@ -1,5 +1,6 @@
 package com.online.cinema;
 
+import com.online.cinema.config.AppConfig;
 import com.online.cinema.entity.CinemaHall;
 import com.online.cinema.entity.Movie;
 import com.online.cinema.entity.MovieSession;
@@ -7,7 +8,6 @@ import com.online.cinema.entity.Order;
 import com.online.cinema.entity.ShoppingCart;
 import com.online.cinema.entity.User;
 import com.online.cinema.exceptions.AuthenticationException;
-import com.online.cinema.lib.Injector;
 import com.online.cinema.security.AuthenticationService;
 import com.online.cinema.service.CinemaHallService;
 import com.online.cinema.service.MovieService;
@@ -19,13 +19,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("com.online.cinema");
     private static final Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MovieService movieService = context.getBean(MovieService.class);
+
         Movie movie1 = new Movie();
         movie1.setTitle("Movie1");
         movieService.add(movie1);
@@ -34,8 +38,7 @@ public class Main {
         movieService.add(movie2);
         movieService.getAll().forEach(logger::info);
 
-        CinemaHallService cinemaHallService
-                = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+        CinemaHallService cinemaHallService = context.getBean(CinemaHallService.class);
 
         CinemaHall cinemaHall1 = new CinemaHall();
         cinemaHall1.setDescription("HALL NUMBER ONE");
@@ -50,8 +53,7 @@ public class Main {
         movieSession1.setMovie(movie1);
         movieSession1.setShowTime(LocalDateTime.of(2020, 10, 20, 15, 30));
 
-        MovieSessionService movieSessionService
-                = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+        MovieSessionService movieSessionService = context.getBean(MovieSessionService.class);
 
         movieSessionService.add(movieSession1);
         MovieSession movieSession2 = new MovieSession();
@@ -65,10 +67,9 @@ public class Main {
         logger.info(movieSessionService
                 .findAvailableSessions(2L, LocalDate.of(2020, 10, 22)));
 
-        UserService userService
-                = (UserService) injector.getInstance(UserService.class);
-        AuthenticationService authenticationService
-                = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        UserService userService = context.getBean(UserService.class);
+        AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
+
         authenticationService.register("user1@gmail.com", "pass");
         authenticationService.register("user2@gmail.com", "pass");
         User user = userService.findByEmail("user1@gmail.com").get();
@@ -79,8 +80,8 @@ public class Main {
             logger.warn("Login failed: " + e.getMessage(), e);
         }
 
-        ShoppingCartService shoppingCartService
-                = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
+
         shoppingCartService.addSession(movieSession1, user);
         shoppingCartService.addSession(movieSession2, user);
         logger.info("Added sessions to shopping cart " + shoppingCartService.getByUser(user));
@@ -90,7 +91,7 @@ public class Main {
                 + shoppingCartService.getByUser(user) + "after clearing");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
 
-        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+        OrderService orderService = context.getBean(OrderService.class);
 
         Order order = orderService.completeOrder(shoppingCart);
         logger.info("ORDER AFTER COMPLETE ORDER\n" + order);
