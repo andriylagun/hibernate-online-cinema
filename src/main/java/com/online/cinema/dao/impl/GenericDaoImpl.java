@@ -2,20 +2,21 @@ package com.online.cinema.dao.impl;
 
 import com.online.cinema.dao.GenericDao;
 import com.online.cinema.exceptions.DataProcessingException;
-import com.online.cinema.util.HibernateUtil;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     private static final Logger logger = Logger.getLogger(GenericDaoImpl.class);
     protected final SessionFactory factory;
 
-    protected GenericDaoImpl() {
-        this.factory = HibernateUtil.getSessionFactory();
+    @Autowired
+    protected GenericDaoImpl(SessionFactory sessionFactory) {
+        this.factory = sessionFactory;
     }
 
     @Override
@@ -24,7 +25,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(element);
             transaction.commit();
@@ -44,7 +45,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     protected List<T> getAll(Class<T> clazz) {
         logger.info("Trying to get all entities");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             CriteriaQuery<T> criteriaQuery = session.getCriteriaBuilder()
                     .createQuery(clazz);
             criteriaQuery.from(clazz);
@@ -56,7 +57,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     protected T get(Class<T> clazz, Long id) {
         logger.info("Trying to get entity");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             return session.get(clazz, id);
         }
     }
