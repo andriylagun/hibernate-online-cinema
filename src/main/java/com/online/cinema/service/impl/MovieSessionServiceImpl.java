@@ -13,7 +13,7 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     private MovieSessionDao movieSessionDao;
 
     @Autowired
-    public void setMovieSessionDao(MovieSessionDao movieSessionDao) {
+    public MovieSessionServiceImpl(MovieSessionDao movieSessionDao) {
         this.movieSessionDao = movieSessionDao;
     }
 

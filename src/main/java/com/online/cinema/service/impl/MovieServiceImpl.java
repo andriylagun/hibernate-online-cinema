@@ -12,7 +12,7 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Autowired
-    public void setMovieDao(MovieDao movieDao) {
+    public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
 

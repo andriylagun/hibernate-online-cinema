@@ -12,7 +12,7 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     private CinemaHallDao cinemaHallDao;
 
     @Autowired
-    public void setCinemaHallDao(CinemaHallDao cinemaHallDao) {
+    public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
         this.cinemaHallDao = cinemaHallDao;
     }
 
