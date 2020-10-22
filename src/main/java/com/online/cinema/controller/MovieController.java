@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RequestMapping("/movies")
 @RestController
@@ -33,7 +34,8 @@ public class MovieController {
     }
 
     @PostMapping
-    public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
+    public RedirectView addMovie(@RequestBody MovieRequestDto movieRequestDto) {
         movieService.add(movieDtoMapper.fromRequestDto(movieRequestDto));
+        return new RedirectView("/movies");
     }
 }
