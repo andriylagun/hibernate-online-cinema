@@ -3,10 +3,9 @@ package com.online.cinema.mapper.moviesession;
 import com.online.cinema.entity.MovieSession;
 import com.online.cinema.service.CinemaHallService;
 import com.online.cinema.service.MovieService;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Component
 public class MovieSessionDtoMapper {
