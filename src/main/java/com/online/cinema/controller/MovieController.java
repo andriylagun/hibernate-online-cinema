@@ -1,8 +1,8 @@
 package com.online.cinema.controller;
 
-import com.online.cinema.dto.movie.MovieDtoMapper;
-import com.online.cinema.dto.movie.MovieRequestDto;
-import com.online.cinema.dto.movie.MovieResponseDto;
+import com.online.cinema.mapper.movie.MovieDtoMapper;
+import com.online.cinema.mapper.movie.MovieRequestDto;
+import com.online.cinema.mapper.movie.MovieResponseDto;
 import com.online.cinema.service.MovieService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RequestMapping("/movies")
 @RestController
@@ -34,8 +33,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public RedirectView addMovie(@RequestBody MovieRequestDto movieRequestDto) {
+    public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
         movieService.add(movieDtoMapper.fromRequestDto(movieRequestDto));
-        return new RedirectView("/movies");
     }
 }

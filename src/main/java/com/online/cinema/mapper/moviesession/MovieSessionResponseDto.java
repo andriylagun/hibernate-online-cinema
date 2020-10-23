@@ -1,5 +1,6 @@
-package com.online.cinema.dto.moviesession;
+package com.online.cinema.mapper.moviesession;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
@@ -7,6 +8,5 @@ public class MovieSessionResponseDto {
     private Long id;
     private Long movieId;
     private Long cinemaHallId;
-    private String sessionDate;
-    private String sessionTime;
+    private LocalDateTime sessionDateTime;
 }

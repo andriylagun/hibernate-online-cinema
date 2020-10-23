@@ -1,4 +1,4 @@
-package com.online.cinema.dto.movie;
+package com.online.cinema.mapper.movie;
 
 import com.online.cinema.entity.Movie;
 import org.springframework.stereotype.Component;

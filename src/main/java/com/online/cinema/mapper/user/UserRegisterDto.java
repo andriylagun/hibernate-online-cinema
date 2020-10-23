@@ -1,4 +1,4 @@
-package com.online.cinema.dto.user;
+package com.online.cinema.mapper.user;
 
 import lombok.Data;
 

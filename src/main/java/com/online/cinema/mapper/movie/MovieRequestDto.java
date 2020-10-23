@@ -1,4 +1,4 @@
-package com.online.cinema.dto.movie;
+package com.online.cinema.mapper.movie;
 
 import lombok.Data;
 
