@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession>
         implements MovieSessionDao {
-    private static Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 
     protected MovieSessionDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
